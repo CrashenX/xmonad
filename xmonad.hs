@@ -3,16 +3,24 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
-import XMonad.Layout.WindowNavigation
+import XMonad.Layout.Named
+import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.WindowNavigation
 import System.IO
+
+rzTall   = ResizableTall 1 (3/100) (1/2) []
+myLayout = (   Full
+           ||| (named "Tall"   $ rzTall)
+           ||| (named "Mirror" $ reflectHoriz rzTall)
+           ||| (named "Wide"   $ Mirror (rzTall))
+           )
 
 main = do
         xmproc <- spawnPipe "xmobar"
         xmonad $ defaultConfig 
             { manageHook = manageDocks <+> manageHook defaultConfig
-            , layoutHook = avoidStruts $ windowNavigation
-                                       $ layoutHook defaultConfig
+            , layoutHook = windowNavigation $ avoidStruts $ myLayout
             , logHook = dynamicLogWithPP xmobarPP
                 { ppOutput = hPutStrLn xmproc
                 , ppTitle = xmobarColor "green" "" . shorten 50
@@ -55,7 +63,7 @@ main = do
             , ((mod4Mask .|. shiftMask, xK_j), sendMessage $ Swap D)
             , ((mod4Mask .|. shiftMask, xK_k), sendMessage $ Swap U)
             , ((mod4Mask .|. shiftMask, xK_l), sendMessage $ Swap R)
-            -- ?
+            -- Resize windows (only works properly with ResizableTall atm)
             , ((mod4Mask .|. controlMask, xK_h), sendMessage $ Shrink)
             , ((mod4Mask .|. controlMask, xK_j), sendMessage $ MirrorShrink)
             , ((mod4Mask .|. controlMask, xK_k), sendMessage $ MirrorExpand)
