@@ -7,7 +7,6 @@ import XMonad.Layout.Named
 import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.WindowNavigation
-import Control.Monad
 import System.IO
 
 rzTall   = ResizableTall 1 (3/100) (1/2) []
@@ -16,30 +15,32 @@ myLayout = Full
            ||| named "Mirror" (reflectHoriz rzTall)
            ||| named "Wide"   (Mirror rzTall)
 
+-- removeKeys has a bug that causes it to only remove the first key in the
+-- list. This function works around that, it should be removed once the
+-- arch package is updated with the bugfix.
 removeKeysFixed :: XConfig a -> [(ButtonMask,KeySym)] -> XConfig a
 removeKeysFixed xconf [] = xconf
 removeKeysFixed xconf keys = foldr (\x y -> y `removeKeys` [x]) xconf keys
 
-vimSwapMap xK_h = sendMessage $ Swap L
-vimSwapMap xK_j = sendMessage $ Swap D
-vimSwapMap xK_k = sendMessage $ Swap U
-vimSwapMap xK_l = sendMessage $ Swap R
+-- pattern matching seems broken here, so use guards instead
+vimDir k
+    | k == xK_h = L
+    | k == xK_j = D
+    | k == xK_k = U
+    | k == xK_l = R
 
-vimGoMap xK_h = sendMessage $ Go L
-vimGoMap xK_j = sendMessage $ Go D
-vimGoMap xK_k = sendMessage $ Go U
-vimGoMap xK_l = sendMessage $ Go R
+vimResizeMap k
+    | k == xK_h = sendMessage $ Shrink
+    | k == xK_j = sendMessage $ MirrorShrink
+    | k == xK_k = sendMessage $ MirrorExpand
+    | k == xK_l = sendMessage $ Expand
 
-vimResizeMap xK_h = sendMessage Shrink
-vimResizeMap xK_j = sendMessage MirrorShrink
-vimResizeMap xK_k = sendMessage MirrorExpand
-vimResizeMap xK_l = sendMessage Expand
-
+-- List of the bound keys for convenience
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
 
-keysList = [((customShiftMask, x), vimSwapMap x)   | x <- vimKeys] ++
-           [((customCtrlMask , x), vimResizeMap x) | x <- vimKeys] ++
-           [((mod4Mask       , x), vimGoMap x) | x <- vimKeys]
+keysList = [((customShiftMask,x),sendMessage $ Swap (vimDir x))|x<-vimKeys]++
+           [((customCtrlMask ,x),vimResizeMap x) | x <- vimKeys] ++
+           [((mod4Mask       ,x),sendMessage $ Go (vimDir x)) | x <- vimKeys]
 
 customShiftMask = mod4Mask .|. shiftMask
 customCtrlMask  = mod4Mask .|. controlMask
@@ -61,18 +62,7 @@ main = do
             }
 
             -- Remove bindings to keys so they can be reassigned
-
-            -- NOTE: There is a bug in removeKeys that makes it act like what
-            -- you would expect from a function called removeKey (i.e. it only
-            -- operates on the first element in a list). Therefore we are using
-            -- the removedKeysFixed function which works around this bug. Once
-            -- the bug fix has been pulled into the current xmonad-contrib
-            -- package the code commented below can replace the repeated calls
-            -- below:
-            
-            `removeKeysFixed`
-            [ (i, j) | i <- [mod4Mask, mod4Mask .|. shiftMask],
-                       j <- [xK_h, xK_j, xK_k, xK_l]
-            ]
-
+            -- TODO: switch this to 'removeKeys' once the package is updated
+            -- with the bugfix.
+            `removeKeysFixed` [(i,j)|i<-[mod4Mask,customShiftMask],j<-vimKeys]
             `additionalKeys` keysList
