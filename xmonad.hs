@@ -20,10 +20,15 @@ removeKeysFixed :: XConfig a -> [(ButtonMask,KeySym)] -> XConfig a
 removeKeysFixed xconf [] = xconf
 removeKeysFixed xconf keys = foldr (\x y -> y `removeKeys` [x]) xconf keys
 
-vimMoveMap xK_h = L
-vimMoveMap xK_j = D
-vimMoveMap xK_k = U
-vimMoveMap xK_l = R
+vimSwapMap xK_h = sendMessage $ Swap L
+vimSwapMap xK_j = sendMessage $ Swap D
+vimSwapMap xK_k = sendMessage $ Swap U
+vimSwapMap xK_l = sendMessage $ Swap R
+
+vimGoMap xK_h = sendMessage $ Go L
+vimGoMap xK_j = sendMessage $ Go D
+vimGoMap xK_k = sendMessage $ Go U
+vimGoMap xK_l = sendMessage $ Go R
 
 vimResizeMap xK_h = sendMessage Shrink
 vimResizeMap xK_j = sendMessage MirrorShrink
@@ -31,6 +36,10 @@ vimResizeMap xK_k = sendMessage MirrorExpand
 vimResizeMap xK_l = sendMessage Expand
 
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
+
+keysList = [((customShiftMask, x), vimSwapMap x)   | x <- vimKeys] ++
+           [((customCtrlMask , x), vimResizeMap x) | x <- vimKeys] ++
+           [((mod4Mask       , x), vimGoMap x) | x <- vimKeys]
 
 customShiftMask = mod4Mask .|. shiftMask
 customCtrlMask  = mod4Mask .|. controlMask
@@ -66,11 +75,4 @@ main = do
                        j <- [xK_h, xK_j, xK_k, xK_l]
             ]
 
-            `additionalKeys` (
-                -- Add bindings for moving windows within a workspace
-                [((customShiftMask, x),sendMessage $ Swap (vimMoveMap x)) | x <- vimKeys] ++
-                -- Resize windows (only works properly with ResizableTall atm)
-                [((customCtrlMask, x), vimResizeMap x) | x <- vimKeys] ++
-                -- Add bindings for navigating windows within a workspace
-                [((mod4Mask,x),sendMessage $ Go (vimMoveMap x)) | x <- vimKeys]
-            )
+            `additionalKeys` keysList
