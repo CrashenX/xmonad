@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Operations
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
@@ -7,37 +8,25 @@ import XMonad.Layout.Named
 import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.WindowNavigation
+import XMonad.Util.CustomKeys
+import XMonad.StackSet as W
+import Data.List (find)
 import System.IO
+import Control.Monad
 
-rzTall   = ResizableTall 1 (3/100) (1/2) []
-myLayout = Full
-           ||| named "Tall"     rzTall
-           ||| named "Mirror" (reflectHoriz rzTall)
-           ||| named "Wide"   (Mirror rzTall)
 
--- removeKeys has a bug that causes it to only remove the first key in the
--- list. This function works around that, it should be removed once the
--- arch package is updated with the bugfix.
+-- define layouts
+rzTall     = ResizableTall 1 (3/100) (1/2) []
+fullLayout = named "Full" Full
+tallLayout = named "Tall" rzTall
+mirrorTall = named "Mirror" $ reflectHoriz rzTall
+wideLayout = named "Wide" $ Mirror rzTall
 
--- The type here says we have a function that takes an Xconfig type, and a list
--- of tuples of ButtonMasks and KeySyms, and we return an Xconfig.
-removeKeysFixed :: XConfig a -> [(ButtonMask,KeySym)] -> XConfig a
--- Here we are calling foldr on the keys list with an anonymous function that
--- takes two parameters (x and y), where y is our carry-value and x is the
--- current element of the list that we are traversing. For each element of
--- the list, we put the current list element into it's own list by saying [x]
--- and then we call removeKeys with that list and our carry value.  The carry
--- value is an XConfig, and our intial value when we start folding is the
--- parameter xconf.
-removeKeysFixed xconf keys = foldr (\x y -> y `removeKeys` [x]) xconf keys
+myLayout = fullLayout ||| tallLayout ||| mirrorTall ||| wideLayout
 
--- Here we are using "function guards" which acts sort of like a switch
--- statement. We can't pattern match on the value xK_{h,j,k,l} because they are
--- regular values and haskell will interpret is as a local name for the
--- argument pased in. Instead we accept a parameter, k, and compare the value
--- of k against the possible values we expect. The runtime will throw an
--- exception if we pass in something other than one of the four keys we are
--- expecting.
+curLayout :: X String
+curLayout = gets windowset >>= return . description . W.layout . W.workspace . W.current
+
 vimDir k
     | k == xK_h = L
     | k == xK_j = D
@@ -50,15 +39,27 @@ vimResizeMap k
     | k == xK_k = sendMessage $ MirrorExpand
     | k == xK_l = sendMessage $ Expand
 
--- List of the bound keys for convenience
+vimResizeMapMirror k
+    | k == xK_h = sendMessage $ Expand
+    | k == xK_j = sendMessage $ MirrorShrink
+    | k == xK_k = sendMessage $ MirrorExpand
+    | k == xK_l = sendMessage $ Shrink
+
+vimGetResizeMap k = do
+    str <- curLayout
+    case str of
+        "Mirror"  -> vimResizeMapMirror k
+        otherwise -> vimResizeMap k
+    return ()
+
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
 
--- Here we define key list as the concatenation of three lists of key mappings.
--- We could define this when we call addKeys, but we do so here for ease of
--- reading and to seperate out the keys we want to map from the actual mapping
-keysList = [((customShiftMask,x),sendMessage $ Swap (vimDir x))|x<-vimKeys]++
-           [((customCtrlMask ,x),vimResizeMap x) | x <- vimKeys] ++
-           [((mod4Mask       ,x),sendMessage $ Go (vimDir x)) | x <- vimKeys]
+deleteList _ = [(i,j)|i<-[mod4Mask,customShiftMask,customCtrlMask],j<-vimKeys]
+
+keysList l =
+       [((customShiftMask,x),sendMessage $ Swap (vimDir x))|x<-vimKeys]
+    ++ [((customCtrlMask ,x),vimGetResizeMap x) | x <- vimKeys]
+    ++ [((mod4Mask       ,x),sendMessage $ Go (vimDir x)) | x <- vimKeys]
 
 -- Convenience functions defining our masks to make the code more readable.
 customShiftMask = mod4Mask .|. shiftMask
@@ -85,14 +86,9 @@ main = do
                 , ppTitle = xmobarColor "green" "" . shorten 50
                 }
             , modMask = mod4Mask
+            , keys = customKeys deleteList keysList
             , borderWidth = 2
             , terminal = "urxvt"
             , normalBorderColor = "#333333"
             , focusedBorderColor = "#FFAA00"
             }
-
-            -- Remove bindings to keys so they can be reassigned
-            -- TODO: switch this to 'removeKeys' once the package is updated
-            -- with the bugfix.
-            `removeKeysFixed` [(i,j)|i<-[mod4Mask,customShiftMask],j<-vimKeys]
-            `additionalKeys` keysList
