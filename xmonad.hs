@@ -8,6 +8,8 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.WindowNavigation
 import XMonad.Util.CustomKeys
+import XMonad.StackSet as W
+import Data.List (find)
 import System.IO
 import Control.Monad
 
@@ -21,6 +23,14 @@ wideLayout = named "Wide" $ Mirror rzTall
 
 myLayout = fullLayout ||| tallLayout ||| mirrorTall ||| wideLayout
 
+layoutBindAction f = withWindowSet (f . description . W.layout . W.workspace . W.current)
+
+bindOn xc bindings = layoutBindAction xc $ chooser where
+    chooser xc = case find ((xc==).fst) bindings of
+        Just (_,action) -> action
+        Nothing         -> case find ((""==).fst) bindings of
+                             Just (_, action) -> action
+                             Nothing          -> return ()
 vimDir k
     | k == xK_h = L
     | k == xK_j = D
@@ -33,25 +43,12 @@ vimResizeMap k
     | k == xK_k = sendMessage $ MirrorExpand
     | k == xK_l = sendMessage $ Expand
 
--- vimResizeMapMirror k
---     | k == xK_h = sendMessage $ MirrorShrink
---     | k == xK_j = sendMessage $ Shrink
---     | k == xK_k = sendMessage $ Expand
---     | k == xK_l = sendMessage $ MirrorExpand
-
 vimResizeMapMirror k
-    | k == xK_h = sendMessage $ Expand
-    | k == xK_j = sendMessage $ Expand
+    | k == xK_h = sendMessage $ MirrorShrink
+    | k == xK_j = sendMessage $ Shrink
     | k == xK_k = sendMessage $ Expand
-    | k == xK_l = sendMessage $ Expand
+    | k == xK_l = sendMessage $ MirrorExpand
 
-compareLayouts l1 l2 = (description l1) == (description l2)
-
-getVimResizeMap l
-    | (compareLayouts (layoutHook l) mirrorTall) = vimResizeMapMirror
-    | otherwise = vimResizeMap
-
--- List of the bound keys for convenience
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
 
 deleteList _ = [(i,j)|i<-[mod4Mask,customShiftMask,customCtrlMask],j<-vimKeys]
