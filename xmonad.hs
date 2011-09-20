@@ -23,14 +23,10 @@ wideLayout = named "Wide" $ Mirror rzTall
 
 myLayout = fullLayout ||| tallLayout ||| mirrorTall ||| wideLayout
 
-layoutBindAction f = withWindowSet (f . description . W.layout . W.workspace . W.current)
+layoutName :: XConfig Layout -> String
+layoutName l 
+    | l == (defaultConfig l fullLayout) = "Full"
 
-bindOn xc bindings = layoutBindAction xc $ chooser where
-    chooser xc = case find ((xc==).fst) bindings of
-        Just (_,action) -> action
-        Nothing         -> case find ((""==).fst) bindings of
-                             Just (_, action) -> action
-                             Nothing          -> return ()
 vimDir k
     | k == xK_h = L
     | k == xK_j = D
@@ -44,10 +40,14 @@ vimResizeMap k
     | k == xK_l = sendMessage $ Expand
 
 vimResizeMapMirror k
-    | k == xK_h = sendMessage $ MirrorShrink
-    | k == xK_j = sendMessage $ Shrink
-    | k == xK_k = sendMessage $ Expand
-    | k == xK_l = sendMessage $ MirrorExpand
+    | k == xK_h = sendMessage $ Expand
+    | k == xK_j = sendMessage $ MirrorShrink
+    | k == xK_k = sendMessage $ MirrorExpand
+    | k == xK_l = sendMessage $ Shrink
+
+getVimResizeMap l
+    | (layoutName l) == "Mirror" = vimResizeMapMirror
+    | otherwise                  = vimResizeMap
 
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
 
