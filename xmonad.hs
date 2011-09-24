@@ -76,6 +76,8 @@ keysList l =
     ++ [((mod4Mask       ,x),sendMessage $ Go (vimDir x)) | x <- vimKeys]
        -- Add keybinding to launch dmenu
     ++ [((mod4Mask       , xK_o), spawn myDmenu)
+       -- Add additional keybinding to close focused window
+       ,((mod4Mask       , xK_w), kill)
        -- Add keybindings to cycle workspaces
        ,((mod4Mask       , xK_n), nextWS)
        ,((mod4Mask       , xK_p), prevWS)
