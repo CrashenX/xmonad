@@ -45,10 +45,17 @@ vimResizeMapMirror k
     | k == xK_k = sendMessage $ MirrorExpand
     | k == xK_l = sendMessage $ Shrink
 
+vimResizeMapWide k
+    | k == xK_h = sendMessage $ MirrorExpand
+    | k == xK_j = sendMessage $ Expand
+    | k == xK_k = sendMessage $ Shrink
+    | k == xK_l = sendMessage $ MirrorShrink
+
 vimGetResizeMap k = do
     str <- curLayout
     case str of
         "Mirror"  -> vimResizeMapMirror k
+        "Wide"    -> vimResizeMapWide k
         otherwise -> vimResizeMap k
     return ()
 
