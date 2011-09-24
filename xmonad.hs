@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Operations
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -60,13 +61,29 @@ vimGetResizeMap k = do
     return ()
 
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
+workspaceKeys = [xK_n, xK_p]
+allKeys = vimKeys ++ workspaceKeys
+myDmenu = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
 
-deleteList _ = [(i,j)|i<-[mod4Mask,customShiftMask,customCtrlMask],j<-vimKeys]
+deleteList _ = [(i,j)|i<-[mod4Mask,customShiftMask,customCtrlMask],j<-allKeys]
 
 keysList l =
+       -- Add keybindings to move windows around within a workspace
        [((customShiftMask,x),sendMessage $ Swap (vimDir x))|x<-vimKeys]
+       -- Add keybindings to resize windows within a workspace
     ++ [((customCtrlMask ,x),vimGetResizeMap x) | x <- vimKeys]
+       -- Add keybindings to change focused window within a workspace
     ++ [((mod4Mask       ,x),sendMessage $ Go (vimDir x)) | x <- vimKeys]
+       -- Add keybinding to launch dmenu
+    ++ [((mod4Mask       , xK_o), spawn myDmenu)
+       -- Add keybindings to cycle workspaces
+       ,((mod4Mask       , xK_n), nextWS)
+       ,((mod4Mask       , xK_p), prevWS)
+       -- Add keybindings to cycle focused window through workspaces
+       ,((customShiftMask, xK_n), shiftToNext >> nextWS)
+       ,((customShiftMask, xK_p), shiftToPrev >> prevWS)
+       ]
+
 
 -- Convenience functions defining our masks to make the code more readable.
 customShiftMask = mod4Mask .|. shiftMask
