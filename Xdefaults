@@ -1,0 +1,123 @@
+! ----------------------------------
+! file:         ~/.Xdefaults
+! author:       Tim Skinner
+! modified:     April 2011
+! vim: nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
+! ----------------------------------
+
+! Terminal Emulator Colors (works with xterm and (u)rxvt
+*background: #111111
+*foreground: #babdb6
+! terminal colors for black/dark grey
+*color0: #000000
+*color8: #555753
+! terminal  colors for dark red/red
+*color1: #ff6565
+*color9: #ff8d8d
+! terminal colors for dark green/green
+*color2: #93d44f
+*color10: #c8e7a8
+! terminal colors for dark yellow/yellow
+*color3: #eab93d
+*color11: #ffc123
+! terminal colors for dark blue/blue
+*color4: #204a87
+*color12: #3465a4
+! terminal colors for dark magenta/magenta
+*color5: #ce5c00
+*color13: #f57900
+! terminal colors for dark cyan/cyan
+*color6: #89b6e2
+*color14: #46a4ff
+! terminal colors for light grey/white
+*color7: #cccccc
+*color15: #ffffff
+
+! Xcursor Settings
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size: 22
+
+! Xft Settings
+Xft.dpi: 96
+Xft.aantialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintslight
+
+
+! xterm
+xterm*faceName: terminuxbold:pixelsize=12
+xterm*dynamicColors: true
+xterm*utf8: 2
+xterm*eightBitInput: true
+xterm*saveLines: 1024
+xterm*scrollTtyKeypress: true
+xterm*scrollTtyOutput: false
+xterm*scrollBar: false
+xterm*rightScrollBar: false
+xterm*jumpScroll: true
+xterm*multiScroll: true
+xterm*toolBar: false
+
+! urxvt
+! font preference
+urxvt*font: xft:Dejavu Sans Mono:pixelsize=12:book
+urxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=12:bold
+
+!initial size
+urxvt*geometry:           120x35
+!internal whitespace
+urxvt*internalBorder:     5
+!fade text n% upon unfocus
+urxvt*fading:             20
+!darken=(0 to 100) lighten=(-1 to -100)
+urxvt*shading:            30
+!tint background with this color
+urxvt*tintColor:          black
+!set to 32-bit for real transparency (compositing required)
+!urxvt*depth:             24
+!save n lines of scrollback buffer
+urxvt*saveLines:          32767
+!flash screen for attention
+urxvt*visualBell:         true
+!jump to bottom (prompt) on keypress
+urxvt*scrollTtyKeypress:  true
+!jump to bottom (prompt) when tty gets new lines
+urxvt*scrollWithBuffer:   false
+!jump to bottom (prompt) on tty output
+urxvt*scrollTtyOutput:    false
+!toggle scrollbar
+urxvt*scrollBar:          false
+!scrollbar styles: rxvt, plain, next or xterm
+urxvt*scrollstyle:        plain
+!scrollbar alignment
+urxvt*scrollBar_right:    true
+urxvt*scrollColor:        #777777
+urxvt*cursorColor:        #ffcc00
+!enable pseudo-transparency (requires depth: 24 (see above))
+urxvt*inheritPixmap:      true
+!delimiters for double-click mouse selection
+urxvt*cutchars:           "()*,<>[]{}|'
+!screen dump settings
+urxvt*print-pipe:         cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+!secondary screen scroll (default enabled)
+urxvt*secondaryScroll:    true
+!de-iconify (map) on receipt of a bell character
+urxvt*mapAlert:           true
+!inhibit writing record into the system log file utmp
+urxvt*utmpInhibit:        true
+!! BEGIN urlLauncher settings !!
+urxvt*perl-lib:           /usr/lib/urxvt/perl/
+urxvt*perl-ext-common:    default,matcher
+urxvt*urlLauncher:        /usr/bin/chromium
+urxvt*matcher.button:     1
+!! END urlLauncher settings !!
+!transparent=0000 opaque=ffff
+urxvt*background: rgba:1111/1111/1111/dddd
+
+! xpdf
+xpdf*enableFreetype: yes
+xpdf8antialias: yes
+xpdf*foreground: black
+xpdf*background: white
+xpdf*urlCommand: /usr/bin/chromium %s
