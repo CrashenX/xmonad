@@ -10,6 +10,14 @@ set (XMONAD_VERSION_MINOR 0)
 set (XMONAD_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/.xmonad/")
 
 # Copy files with 644 permissions
-install(FILES xmonad.hs
-    DESTINATION ${XMONAD_INSTALL_DIR})
+install(FILES xmonad.hs.custom
+        DESTINATION ${XMONAD_INSTALL_DIR})
+
+install(FILES Xdefaults.custom
+              xinitrc.custom
+              xmobarrc.custom
+              Xmodmap.custom
+              xmonad.hs.custom
+              xsession.custom
+        DESTINATION ${CMAKE_INSTALL_PREFIX})
 
