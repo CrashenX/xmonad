@@ -15,6 +15,9 @@ fi
 # Enable screen saver
 nohup xscreensaver -nosplash &
 
+# Enable fancy effects
+xcompmgr -c -f -C -F &
+
 # Load Xresources
 #xrdb -merge ~/.Xresources
 
