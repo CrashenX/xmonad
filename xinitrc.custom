@@ -18,6 +18,9 @@ nohup xscreensaver -nosplash &
 # Enable fancy effects
 xcompmgr -c -f -C -F &
 
+# use a real cursor
+xsetroot -cursor_name left_ptr
+
 # Load Xresources
 #xrdb -merge ~/.Xresources
 
