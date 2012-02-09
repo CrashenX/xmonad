@@ -21,6 +21,9 @@ xcompmgr -c -f -C -F &
 # use a real cursor
 xsetroot -cursor_name left_ptr
 
+# enable ssh-agent per-session
+eval $(ssh-agent)
+
 # Load Xresources
 #xrdb -merge ~/.Xresources
 
