@@ -93,7 +93,7 @@ urxvt*scrollstyle:        plain
 !scrollbar alignment
 urxvt*scrollBar_right:    true
 urxvt*scrollColor:        #777777
-urxvt*cursorColor:        #ffcc00
+urxvt*cursorColor:        #596D89
 !enable pseudo-transparency (requires depth: 24 (see above))
 urxvt*inheritPixmap:      true
 !delimiters for double-click mouse selection
