@@ -12,6 +12,13 @@ if [ -f "$usermodmap" ]; then
 fi
 #setxkbmap -layout "$(setxkbmap -print | awk -F + '/xkb_symbols/ {print $2}')" -option ctrl:nocaps
 
+# Enable dual head if two monitors
+screens=`xrandr -q | grep ' connected' | wc -l`
+if [[ 2 == $screens ]]
+then
+    xrandr --output DVI-0 --mode 1680x1050 --left-of DVI-1
+fi
+
 # Enable screen saver
 nohup xscreensaver -nosplash &
 
@@ -29,3 +36,5 @@ eval $(ssh-agent)
 
 # Launch xmonad
 xmonad
+
+exit 0
