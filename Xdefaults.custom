@@ -1,6 +1,6 @@
 ! ----------------------------------
 ! file:         ~/.Xdefaults
-! author:       Tim Skinner
+! author:       Tim Skinner, Jesse Cook
 ! modified:     April 2011
 ! vim: nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
 ! ----------------------------------
@@ -61,8 +61,12 @@ xterm*toolBar: false
 
 ! urxvt
 ! font preference
-urxvt*font: xft:Dejavu Sans Mono:pixelsize=12:book
-urxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=12:bold
+#urxvt*font: xft:Dejavu Sans Mono:pixelsize=12:book
+#urxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=12:bold
+urxvt*font: xft:Inconsolata:pixelsize=16:antialias=true:hinting=true
+urxvt*boldFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:hinting=true
+urxvt*italicFont: xft:Inconsolata:pixelsize=16:antialias=true:italic:autohint=true:hinting=true
+urxvt*bolditalicFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:italic:autohint=true:hinting=true
 
 !initial size
 urxvt*geometry:           120x35
