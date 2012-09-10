@@ -28,6 +28,9 @@ xcompmgr -c -f -C -F &
 # use a real cursor
 xsetroot -cursor_name left_ptr
 
+# set a wallpaper
+feh --bg-tile ~/wallpapers/current_background
+
 # enable ssh-agent per-session
 eval $(ssh-agent)
 
