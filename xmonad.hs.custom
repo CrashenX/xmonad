@@ -84,6 +84,8 @@ keysList l =
        -- Add keybindings to cycle focused window through workspaces
        ,((customShiftMask, xK_n), shiftToNext >> nextWS)
        ,((customShiftMask, xK_p), shiftToPrev >> prevWS)
+       -- Add keybindings to lock screen
+       ,((mod1Mask       , xK_l), spawn "xscreensaver-command --lock")
        ]
 
 
