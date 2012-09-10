@@ -63,10 +63,14 @@ xterm*toolBar: false
 ! font preference
 #urxvt*font: xft:Dejavu Sans Mono:pixelsize=12:book
 #urxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=12:bold
-urxvt*font: xft:Inconsolata:pixelsize=16:antialias=true:hinting=true
-urxvt*boldFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:hinting=true
-urxvt*italicFont: xft:Inconsolata:pixelsize=16:antialias=true:italic:autohint=true:hinting=true
-urxvt*bolditalicFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:italic:autohint=true:hinting=true
+#urxvt*font: xft:Inconsolata:pixelsize=16:antialias=true:hinting=true
+#urxvt*boldFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:hinting=true
+#urxvt*italicFont: xft:Inconsolata:pixelsize=16:antialias=true:italic:autohint=true:hinting=true
+#urxvt*bolditalicFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:italic:autohint=true:hinting=true
+urxvt*font: xft:Inconsolata:pixelsize=20:antialias=true:hinting=true
+urxvt*boldFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:hinting=true
+urxvt*italicFont: xft:Inconsolata:pixelsize=20:antialias=true:italic:autohint=true:hinting=true
+urxvt*bolditalicFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:italic:autohint=true:hinting=true
 
 !initial size
 urxvt*geometry:           120x35
