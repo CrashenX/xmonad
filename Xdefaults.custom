@@ -79,11 +79,11 @@ urxvt*internalBorder:     5
 !fade text n% upon unfocus
 urxvt*fading:             20
 !darken=(0 to 100) lighten=(-1 to -100)
-urxvt*shading:            30
+urxvt*shading:            10
 !tint background with this color
-urxvt*tintColor:          black
+#urxvt*tintColor:          black
 !set to 32-bit for real transparency (compositing required)
-!urxvt*depth:             24
+urxvt*depth:              32
 !save n lines of scrollback buffer
 urxvt*saveLines:          32767
 !flash screen for attention
@@ -121,7 +121,7 @@ urxvt*urlLauncher:        /usr/bin/chromium
 urxvt*matcher.button:     1
 !! END urlLauncher settings !!
 !transparent=0000 opaque=ffff
-urxvt*background: rgba:1111/1111/1111/dddd
+#urxvt*background: rgba:1111/1111/1111/dddd
 
 ! xpdf
 xpdf*enableFreetype: yes
