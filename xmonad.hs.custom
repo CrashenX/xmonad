@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.PhysicalScreens
 import XMonad.Operations
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -62,10 +63,13 @@ vimGetResizeMap k = do
 
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
 workspaceKeys = [xK_n, xK_p]
-allKeys = vimKeys ++ workspaceKeys
+screenKeys = [xK_Tab]
+allKeys = vimKeys ++ workspaceKeys ++ screenKeys
 myDmenu = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
 
-deleteList _ = [(i,j)|i<-[mod4Mask,customShiftMask,customCtrlMask],j<-allKeys]
+deleteList _ = [(i,j)|i<-[mod1Mask,mod4Mask,customShiftMask,customCtrlMask]
+               ,      j<-allKeys
+               ]
 
 keysList l =
        -- Add keybindings to move windows around within a workspace
@@ -78,6 +82,10 @@ keysList l =
     ++ [((mod4Mask       , xK_o), spawn myDmenu)
        -- Add additional keybinding to close focused window
        ,((mod4Mask       , xK_w), kill)
+       -- Add keybindings to cycle physical screens
+       ,((customAltMask  , xK_h), onPrevNeighbour W.view)
+       ,((customAltMask  , xK_l), onNextNeighbour W.view)
+       ,((mod4Mask       , xK_Tab), onNextNeighbour W.view)
        -- Add keybindings to cycle workspaces
        ,((mod4Mask       , xK_n), nextWS)
        ,((mod4Mask       , xK_p), prevWS)
@@ -92,6 +100,7 @@ keysList l =
 -- Convenience functions defining our masks to make the code more readable.
 customShiftMask = mod4Mask .|. shiftMask
 customCtrlMask  = mod4Mask .|. controlMask
+customAltMask   = mod4Mask .|. mod1Mask
 
 main = do
         -- since we are in a "do" block, using "<-" here calls the "bind"
