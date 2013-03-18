@@ -63,8 +63,7 @@ vimGetResizeMap k = do
 
 vimKeys = [xK_h, xK_j, xK_k, xK_l]
 workspaceKeys = [xK_n, xK_p]
-screenKeys = [xK_Tab]
-allKeys = vimKeys ++ workspaceKeys ++ screenKeys
+allKeys = vimKeys ++ workspaceKeys
 myDmenu = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
 
 deleteList _ = [(i,j)|i<-[mod1Mask,mod4Mask,customShiftMask,customCtrlMask]
@@ -85,7 +84,6 @@ keysList l =
        -- Add keybindings to cycle physical screens
        ,((customAltMask  , xK_h), onPrevNeighbour W.view)
        ,((customAltMask  , xK_l), onNextNeighbour W.view)
-       ,((mod4Mask       , xK_Tab), onNextNeighbour W.view)
        -- Add keybindings to cycle workspaces
        ,((mod4Mask       , xK_n), nextWS)
        ,((mod4Mask       , xK_p), prevWS)
