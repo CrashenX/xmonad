@@ -7,17 +7,28 @@ project (XMONAD)
 set (XMONAD_VERSION_MAJOR 1)
 set (XMONAD_VERSION_MINOR 0)
 
-set (XMONAD_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/.xmonad/")
+set(Files Xdefaults xinitrc xmobarrc Xmodmap xsession)
+set(Dirs xmonad)
 
-# Copy files with 644 permissions
-install(FILES xmonad.hs.custom
-        DESTINATION ${XMONAD_INSTALL_DIR})
+add_custom_target(config ALL)
 
-install(FILES Xdefaults.custom
-              xinitrc.custom
-              xmobarrc.custom
-              Xmodmap.custom
-              xmonad.hs.custom
-              xsession.custom
-        DESTINATION ${CMAKE_INSTALL_PREFIX})
+foreach(C ${Files})
+    add_custom_command( TARGET config
+                        COMMAND ${CMAKE_COMMAND} -E copy
+                            ${CMAKE_SOURCE_DIR}/config/${C}
+                            ${CMAKE_BINARY_DIR}/config/.${C}
+                      )
+endforeach()
 
+foreach(C ${Dirs})
+    add_custom_command( TARGET config
+                        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                            ${CMAKE_SOURCE_DIR}/config/${C}
+                            ${CMAKE_BINARY_DIR}/config/.${C}
+                      )
+endforeach()
+
+
+install( DIRECTORY ${CMAKE_BINARY_DIR}/config/
+         DESTINATION ${DESTDIR}/$ENV{HOME}/
+       )
