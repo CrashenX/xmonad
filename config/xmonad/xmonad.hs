@@ -12,6 +12,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.WindowNavigation
 import XMonad.Util.CustomKeys
 import XMonad.StackSet as W
+import Graphics.X11.ExtraTypes.XF86
 import Data.List (find)
 import System.IO
 import Control.Monad
@@ -92,6 +93,9 @@ keysList l =
        ,((customShiftMask, xK_p), shiftToPrev >> prevWS)
        -- Add keybindings to lock screen
        ,((mod1Mask, xK_l), spawn "xscreensaver-command --lock")
+       -- Add keybindings for screen brightness
+       ,((0, xF86XK_MonBrightnessUp  ), spawn "xbacklight -time 100 +10")
+       ,((0, xF86XK_MonBrightnessDown), spawn "xbacklight -time 100 -10")
        ]
 
 
