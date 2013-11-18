@@ -72,26 +72,26 @@ deleteList _ = [(i,j)|i<-[mod1Mask,mod4Mask,customShiftMask,customCtrlMask]
 
 keysList l =
        -- Add keybindings to move windows around within a workspace
-       [((customShiftMask,x),sendMessage $ Swap (vimDir x))|x<-vimKeys]
+       [((customShiftMask, x), sendMessage $ Swap (vimDir x))|x<-vimKeys]
        -- Add keybindings to resize windows within a workspace
-    ++ [((customCtrlMask ,x),vimGetResizeMap x) | x <- vimKeys]
+    ++ [((customCtrlMask, x), vimGetResizeMap x) | x <- vimKeys]
        -- Add keybindings to change focused window within a workspace
-    ++ [((mod4Mask       ,x),sendMessage $ Go (vimDir x)) | x <- vimKeys]
+    ++ [((mod4Mask, x), sendMessage $ Go (vimDir x)) | x <- vimKeys]
        -- Add keybinding to launch dmenu
-    ++ [((mod4Mask       , xK_o), spawn myDmenu)
+    ++ [((mod4Mask, xK_o), spawn myDmenu)
        -- Add additional keybinding to close focused window
-       ,((mod4Mask       , xK_w), kill)
+       ,((mod4Mask, xK_w), kill)
        -- Add keybindings to cycle physical screens
-       ,((customAltMask  , xK_h), onPrevNeighbour W.view)
-       ,((customAltMask  , xK_l), onNextNeighbour W.view)
+       ,((customAltMask, xK_h), onPrevNeighbour W.view)
+       ,((customAltMask, xK_l), onNextNeighbour W.view)
        -- Add keybindings to cycle workspaces
-       ,((mod4Mask       , xK_n), nextWS)
-       ,((mod4Mask       , xK_p), prevWS)
+       ,((mod4Mask, xK_n), nextWS)
+       ,((mod4Mask, xK_p), prevWS)
        -- Add keybindings to cycle focused window through workspaces
        ,((customShiftMask, xK_n), shiftToNext >> nextWS)
        ,((customShiftMask, xK_p), shiftToPrev >> prevWS)
        -- Add keybindings to lock screen
-       ,((mod1Mask       , xK_l), spawn "xscreensaver-command --lock")
+       ,((mod1Mask, xK_l), spawn "xscreensaver-command --lock")
        ]
 
 
