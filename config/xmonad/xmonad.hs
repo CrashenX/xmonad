@@ -96,6 +96,10 @@ keysList l =
        -- Add keybindings for screen brightness
        ,((0, xF86XK_MonBrightnessUp  ), spawn "xbacklight -time 100 +10")
        ,((0, xF86XK_MonBrightnessDown), spawn "xbacklight -time 100 -10")
+       -- Add keybindings for volume controls
+       ,((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 1%+")
+       ,((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 1%-")
+       ,((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
        ]
 
 
