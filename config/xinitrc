@@ -42,6 +42,9 @@ eval $(ssh-agent)
 # Load Xresources
 #xrdb -merge ~/.Xresources
 
+# Set default screen brightness
+xbacklight =20
+
 # Launch xmonad
 xmonad
 
