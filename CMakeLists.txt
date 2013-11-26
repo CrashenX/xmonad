@@ -32,3 +32,7 @@ endforeach()
 install( DIRECTORY ${CMAKE_BINARY_DIR}/config/
          DESTINATION ${DESTDIR}/$ENV{HOME}/
        )
+
+install( PROGRAMS ${CMAKE_SOURCE_DIR}/bin/lock
+         DESTINATION ${DESTDIR}/$ENV{HOME}/bin/
+       )
