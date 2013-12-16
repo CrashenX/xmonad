@@ -117,7 +117,7 @@ urxvt*utmpInhibit:        true
 !! BEGIN urlLauncher settings !!
 urxvt*perl-lib:           /usr/lib/urxvt/perl/
 urxvt*perl-ext-common:    default,matcher
-urxvt*urlLauncher:        /usr/bin/chromium
+urxvt*urlLauncher:        /usr/bin/google-chrome
 urxvt*matcher.button:     1
 !! END urlLauncher settings !!
 !transparent=0000 opaque=ffff
