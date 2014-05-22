@@ -1,8 +1,9 @@
 remove Lock = Caps_Lock
-remove Mod1 = Alt_L
-remove Mod4 = Super_R
 keysym Caps_Lock = Control_L
-keysym Super_R = Control_R
+add Control = Control_L
+remove Mod1 = Alt_L
+remove Mod4 = Super_L
 keysym Alt_L = Super_L
-add Control = Control_L Control_R
+keysym Super_L = Alt_L
 add Mod1 = Alt_L
+add Mod4 = Super_L
