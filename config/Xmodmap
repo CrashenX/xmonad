@@ -1,9 +1,11 @@
 remove Lock = Caps_Lock
+remove Mod1 = Alt_L Alt_R
+remove Mod4 = Super_L Super_R
 keysym Caps_Lock = Control_L
-add Control = Control_L
-remove Mod1 = Alt_L
-remove Mod4 = Super_L
 keysym Alt_L = Super_L
+keysym Alt_R = Pointer_Button2
 keysym Super_L = Alt_L
+keysym Super_R = Pointer_Button3
+add Control = Control_L
 add Mod1 = Alt_L
 add Mod4 = Super_L
