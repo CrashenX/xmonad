@@ -67,10 +67,14 @@ xterm*toolBar: false
 #urxvt*boldFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:hinting=true
 #urxvt*italicFont: xft:Inconsolata:pixelsize=16:antialias=true:italic:autohint=true:hinting=true
 #urxvt*bolditalicFont: xft:Inconsolata:pixelsize=16:antialias=true:bold:italic:autohint=true:hinting=true
-urxvt*font: xft:Inconsolata:pixelsize=20:antialias=true:hinting=true
-urxvt*boldFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:hinting=true
-urxvt*italicFont: xft:Inconsolata:pixelsize=20:antialias=true:italic:autohint=true:hinting=true
-urxvt*bolditalicFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:italic:autohint=true:hinting=true
+#urxvt*font: xft:Inconsolata:pixelsize=20:antialias=true:hinting=true
+#urxvt*boldFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:hinting=true
+#urxvt*italicFont: xft:Inconsolata:pixelsize=20:antialias=true:italic:autohint=true:hinting=true
+#urxvt*bolditalicFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:italic:autohint=true:hinting=true
+urxvt*font: xft:Droid Sans Mono:pixelsize=18:antialias=true:hinting=true
+urxvt*boldFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:bold:hinting=true
+urxvt*italicFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:italic:autohint=true:hinting=true
+urxvt*bolditalicFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:bold:italic:autohint=true:hinting=true
 
 !initial size
 urxvt*geometry:           120x35
@@ -103,7 +107,7 @@ urxvt*scrollBar_right:    true
 urxvt*scrollColor:        #777777
 urxvt*cursorColor:        #596D89
 !enable pseudo-transparency (requires depth: 24 (see above))
-urxvt*inheritPixmap:      true
+#urxvt*inheritPixmap:      true
 !delimiters for double-click mouse selection
 urxvt*cutchars:           "()*,<>[]{}|'
 !screen dump settings
@@ -121,7 +125,7 @@ urxvt*urlLauncher:        /usr/bin/google-chrome
 urxvt*matcher.button:     1
 !! END urlLauncher settings !!
 !transparent=0000 opaque=ffff
-#urxvt*background: rgba:1111/1111/1111/dddd
+urxvt*background: rgba:1111/1111/1111/bbbb
 
 ! xpdf
 xpdf*enableFreetype: yes
