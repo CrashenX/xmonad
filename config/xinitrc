@@ -10,6 +10,7 @@ usermodmap=$HOME/.Xmodmap
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
     xkbset m
+    xkbset exp =m
 fi
 #setxkbmap -layout "$(setxkbmap -print | awk -F + '/xkb_symbols/ {print $2}')" -option ctrl:nocaps
 
