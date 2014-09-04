@@ -12,25 +12,28 @@
 *color0: #000000
 *color8: #555753
 ! terminal  colors for dark red/red
-*color1: #ff6565
-*color9: #ff8d8d
+*color1: #DF3027
+#*color1: #FFD6D3
+*color9: #DF5548
+
 ! terminal colors for dark green/green
-*color2: #93d44f
-*color10: #c8e7a8
+*color2: #E1FFBB
+*color10: #96d952
 ! terminal colors for dark yellow/yellow
-*color3: #eab93d
-*color11: #ffc123
+*color3: #FFF89B
+*color11: #FFE447
 ! terminal colors for dark blue/blue
-*color4: #204a87
-*color12: #3465a4
+*color4: #2C618F
+*color12: #4ba4f2
 ! terminal colors for dark magenta/magenta
-*color5: #ce5c00
-*color13: #f57900
+#*color5: #422C07
+*color5: #434343
+*color13: #FCAF3E
 ! terminal colors for dark cyan/cyan
-*color6: #89b6e2
-*color14: #46a4ff
+*color6: #ffffff
+*color14: #ffffff
 ! terminal colors for light grey/white
-*color7: #cccccc
+*color7: #787878
 *color15: #ffffff
 
 ! Xcursor Settings
