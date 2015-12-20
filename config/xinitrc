@@ -31,9 +31,6 @@ feh --bg-fill ~/.config/wallpaper
 # enable ssh-agent per-session
 eval $(ssh-agent)
 
-# Load Xresources
-#xrdb -merge ~/.Xresources
-
 # Set default screen brightness
 xbacklight =20
 
