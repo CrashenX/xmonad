@@ -1,14 +1,14 @@
 #!/bin/bash
 
 Xdefaults='Xdefaults-retina15.4'
+from_path=$(dirname $0)
 
 if [[ -e $1 ]]
 then
     Xdefaults=$1
 fi
-cp $Xdefaults Xdefaults
+cp $from_path/$Xdefaults $from_path/Xdefaults
 
-from_path=$(dirname $0)
 
 for i in Xdefaults Xmodmap xinitrc xmobarrc xmonad/xmonad.hs xsession
 do
