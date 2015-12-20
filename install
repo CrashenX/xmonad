@@ -1,0 +1,11 @@
+#!/bin/bash
+
+from_path=$(dirname $0)
+
+for i in 'Xdefaults' 'Xmodmap' 'xinitrc' 'xmobarrc' 'xmonad' 'xsession'
+do
+    src=$(realpath $from_path/$i)
+    install -vD -m 400 $src ${HOME}/.$i || exit 1
+done
+
+exit 0
