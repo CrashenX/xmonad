@@ -1,13 +1,15 @@
 #!/bin/bash
 
-Xdefaults='Xdefaults-retina15.4'
 from_path=$(dirname $0)
+src=$(realpah $from_path/Xdefaults-retina15.4)
 
-if [[ -e $1 ]]
+in=$(realpath $from_path/$1)
+if [[ -e $in ]]
 then
-    Xdefaults=$1
+    src=$in
 fi
-cp $from_path/$Xdefaults $from_path/Xdefaults
+dst=$(realpath $from_path/Xdefaults)
+cp $src $dst
 
 
 for i in Xdefaults Xmodmap xinitrc xmobarrc xmonad/xmonad.hs xsession
