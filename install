@@ -17,6 +17,8 @@ do
 done
 
 xmonad --recompile
+pkill xmobar
+sleep 1
 xmonad --restart
 
 exit 0

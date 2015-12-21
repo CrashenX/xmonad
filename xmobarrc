@@ -1,5 +1,5 @@
-Config { font = "-*-Fixed-Bold-R-Normal-*-20-*-*-*-*-*-*-*"
-       , bgColor = "black"
+Config { font = "xft:Droid Sans Mono:size=13:bold:antialias=true"
+       , bgColor = "#151515"
        , fgColor = "grey"
        , position = TopW L 100
        , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
@@ -10,5 +10,5 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-20-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %battery% <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %battery% <fc=#FCAF3E>%date%</fc>"
        }

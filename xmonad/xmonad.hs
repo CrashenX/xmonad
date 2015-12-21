@@ -132,6 +132,6 @@ main = do
             , keys = customKeys deleteList keysList
             , borderWidth = 2
             , terminal = "urxvt"
-            , normalBorderColor = "#333333"
-            , focusedBorderColor = "#FFAA00"
+            , normalBorderColor = "#4E4E4E"
+            , focusedBorderColor = "#606060"
             }
