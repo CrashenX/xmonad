@@ -64,16 +64,16 @@ xterm*toolBar: false
 
 ! urxvt
 ! font preference
-#urxvt*font: xft:Dejavu Sans Mono:pixelsize=18:book
-#urxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=18:bold
-#urxvt*font: xft:Inconsolata:pixelsize=18:antialias=true:hinting=true
-#urxvt*boldFont: xft:Inconsolata:pixelsize=18:antialias=true:bold:hinting=true
-#urxvt*italicFont: xft:Inconsolata:pixelsize=18:antialias=true:italic:autohint=true:hinting=true
-#urxvt*bolditalicFont: xft:Inconsolata:pixelsize=18:antialias=true:bold:italic:autohint=true:hinting=true
-urxvt*font: xft:Droid Sans Mono:pixelsize=18:antialias=true:hinting=true
-urxvt*boldFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:bold:hinting=true
-urxvt*italicFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:italic:autohint=true:hinting=true
-urxvt*bolditalicFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:bold:italic:autohint=true:hinting=true
+# urxvt*font: xft:Dejavu Sans Mono:pixelsize=18:book
+# urxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=18:bold
+urxvt*font: xft:Inconsolata:pixelsize=18:antialias=true:hinting=true
+urxvt*boldFont: xft:Inconsolata:pixelsize=18:antialias=true:bold:hinting=true
+urxvt*italicFont: xft:Inconsolata:pixelsize=18:antialias=true:italic:autohint=true:hinting=true
+urxvt*bolditalicFont: xft:Inconsolata:pixelsize=18:antialias=true:bold:italic:autohint=true:hinting=true
+# urxvt*font: xft:Droid Sans Mono:pixelsize=18:antialias=true:hinting=true
+# urxvt*boldFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:bold:hinting=true
+# urxvt*italicFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:italic:autohint=true:hinting=true
+# urxvt*bolditalicFont: xft:Droid Sans Mono:pixelsize=18:antialias=true:bold:italic:autohint=true:hinting=true
 
 !initial size
 urxvt*geometry:           120x35
