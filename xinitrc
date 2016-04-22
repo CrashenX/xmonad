@@ -14,10 +14,10 @@ if [ -f "$usermodmap" ]; then
 fi
 
 # Enable screen saver
-nohup xscreensaver -nosplash &
+# nohup xscreensaver -nosplash &
 
 # Enable auto-suspend (lock requires UPower, PolicyKit, and xscreensaver)
-xautolock -time 5 -locker $HOME/bin/lock &
+# xautolock -time 5 -locker $HOME/bin/lock &
 
 # Enable fancy effects
 xcompmgr -c -f -C -F &
